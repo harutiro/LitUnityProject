@@ -125,6 +125,11 @@ public class Player : MonoBehaviour
 		
 
 		//落下時のGameOver判定
+		if(transform.position.y <= -3)
+        {
+			uiscript.Gameover();
+			animator.SetBool("Dead", true);
+        }
 		
 
 	}
