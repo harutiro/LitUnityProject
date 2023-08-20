@@ -4,6 +4,16 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+	/// <summary>
+	/// 前に進むスピード
+	/// </summary>
+	public float speed = 5.0f;
+
+    /// <summary>
+    /// 横に進むスピード
+    /// </summary>
+	public float slideSpeed = 2.0f;
+
 	//アニメーション
 	Animator animator;
 	//UIを管理するスクリプト
@@ -12,6 +22,8 @@ public class Player : MonoBehaviour
 	GameObject headCollider;
 
 	Rigidbody playerRigidbody;
+
+
 
 
 	void Start()
@@ -28,20 +40,33 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
-        //前に進む
-
+		//前に進む
+		transform.position += new Vector3(0, 0, speed) * Time.deltaTime;
 
 		//現在のX軸の位置を取得
+		float posX = transform.position.x;
 
-
-		//右アローキーを押した時
+        //右アローキーを押した時
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+			if(posX < 1.8f)
+            {
+				transform.position += new Vector3(slideSpeed, 0, 0) * Time.deltaTime;
+            }
+        }
 
 
 		//左アローキーを押した時
-
+		if (Input.GetKey(KeyCode.LeftArrow))
+		{
+			if (posX > -1.8f)
+			{
+				transform.position -= new Vector3(slideSpeed, 0, 0) * Time.deltaTime;
+			}
+		}
 
 		//アニメーション
-	
+
 
 		//現在再生されているアニメーション情報を取得
 		var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
@@ -67,8 +92,10 @@ public class Player : MonoBehaviour
 		if (collider.gameObject.tag == "Goal")
 		{
 			//速度を0にして進むのを止める
+			speed = 0;
 
 			//横移動する速度を0にして左右移動できなくする
+			slideSpeed = 0;
 
 			//ゴールをしたら正面を向くようにする
 			Vector3 lockpos = Camera.main.transform.position;
