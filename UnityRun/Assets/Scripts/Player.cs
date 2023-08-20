@@ -112,6 +112,23 @@ public class Player : MonoBehaviour
 	}
 
 
-	//Triggerでない障害物にぶつかったとき
+    //Triggerでない障害物にぶつかったとき
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Barrier")
+        {
+
+			//速度を0にして進むのを止める
+			speed = 0;
+
+			//横移動する速度を0にして左右移動できなくする
+			slideSpeed = 0;
+
+			//アニメーション
+			animator.SetBool("Dead", true);
+			//UIの表示
+			uiscript.Gameover();
+        }
+    }
 
 }
