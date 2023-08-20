@@ -14,6 +14,16 @@ public class Player : MonoBehaviour
     /// </summary>
 	public float slideSpeed = 2.0f;
 
+	/// <summary>
+	/// ジャンプできる回数
+	/// </summary>
+	public int jumpCount = 2;
+
+	/// <summary>
+	/// 設定したジャンプできる回数を保存する変数
+	/// </summary>
+	int defaultJumpCount;
+
 	//アニメーション
 	Animator animator;
 	//UIを管理するスクリプト
@@ -34,6 +44,9 @@ public class Player : MonoBehaviour
 		playerRigidbody = GetComponent<Rigidbody>();
 		headCollider = GameObject.Find("HeadCollider");
 
+		// 設定したジャンプできる回数を保存
+		defaultJumpCount = jumpCount;
+
 	}
 
 
@@ -47,7 +60,7 @@ public class Player : MonoBehaviour
 		float posX = transform.position.x;
 
         //右アローキーを押した時
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
         {
 			if(posX < 1.8f)
             {
@@ -57,7 +70,7 @@ public class Player : MonoBehaviour
 
 
 		//左アローキーを押した時
-		if (Input.GetKey(KeyCode.LeftArrow))
+		if (Input.GetKey(KeyCode.A))
 		{
 			if (posX > -1.8f)
 			{
@@ -74,7 +87,21 @@ public class Player : MonoBehaviour
 		bool isJump = stateInfo.IsName("Base Layer.Jump");
 		bool isSlide = stateInfo.IsName("Base Layer.Slide");
 
-		//ジャンプ
+        //ジャンプ
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount > 0)
+        {
+			//速度を初期化
+			playerRigidbody.velocity = new Vector3(0, 0, 0);
+
+			//上方向に力を加える
+			playerRigidbody.AddForce(new Vector3(0, 6, 0), ForceMode.Impulse);
+
+			//ジャンプするアニメーションを再生
+			animator.SetTrigger("Jump");
+
+			//残りのジャンプ回数を減らす
+			jumpCount--;
+        }
 
 
 		//スライディングしていたら頭の判定をなくす
@@ -128,6 +155,12 @@ public class Player : MonoBehaviour
 			animator.SetBool("Dead", true);
 			//UIの表示
 			uiscript.Gameover();
+        }
+
+
+		if(collision.gameObject.tag == "Ground")
+        {
+			jumpCount = defaultJumpCount;
         }
     }
 
