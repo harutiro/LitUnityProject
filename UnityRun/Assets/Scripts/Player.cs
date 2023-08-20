@@ -59,14 +59,14 @@ public class Player : MonoBehaviour
 		//現在のX軸の位置を取得
 		float posX = transform.position.x;
 
-        //右アローキーを押した時
-        if (Input.GetKey(KeyCode.D))
-        {
-			if(posX < 1.8f)
-            {
+		//右アローキーを押した時
+		if (Input.GetKey(KeyCode.D))
+		{
+			if (posX < 1.8f)
+			{
 				transform.position += new Vector3(slideSpeed, 0, 0) * Time.deltaTime;
-            }
-        }
+			}
+		}
 
 
 		//左アローキーを押した時
@@ -79,6 +79,15 @@ public class Player : MonoBehaviour
 		}
 
 		//アニメーション
+		if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+			animator.SetBool("Slide", true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+			animator.SetBool("Slide", false);
+        }
 
 
 		//現在再生されているアニメーション情報を取得
@@ -105,6 +114,14 @@ public class Player : MonoBehaviour
 
 
 		//スライディングしていたら頭の判定をなくす
+		if(isSlide == true)
+        {
+			headCollider.SetActive(false);
+        }
+        else
+        {
+			headCollider.SetActive(true);
+        }
 		
 
 		//落下時のGameOver判定
