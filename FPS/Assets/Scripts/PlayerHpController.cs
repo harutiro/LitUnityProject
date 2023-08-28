@@ -10,7 +10,8 @@ public class PlayerHpController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        HPCounter.HPCount = playerHp;
+
     }
 
     // Update is called once per frame
@@ -19,9 +20,10 @@ public class PlayerHpController : MonoBehaviour
         
     }
 
-    void PlayerDamage()
+    void PlayerDamege()
     {
         Debug.Log("player: " + playerHp);
+        HPCounter.HPCount = playerHp;
         playerHp--;
 
         if (playerHp == 0)

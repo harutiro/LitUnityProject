@@ -359,8 +359,10 @@
 "Assets/Scripts/EnemyGenerator.cs"
 "Assets/Scripts/EnemyHpController.cs"
 "Assets/Scripts/EnemyNavigator.cs"
+"Assets/Scripts/HPCounter.cs"
 "Assets/Scripts/PlayerHpController.cs"
 "Assets/Scripts/RayCaster.cs"
+"Assets/Scripts/ScoreCounter.cs"
 -langversion:9.0
 
 /deterministic

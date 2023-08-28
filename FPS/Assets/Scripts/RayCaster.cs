@@ -5,6 +5,7 @@ using UnityEngine;
 public class RayCaster : MonoBehaviour
 {
     public Camera playerCamera;
+    public AudioSource beamSound;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class RayCaster : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            beamSound.Play();
             Shot();
         }
     }

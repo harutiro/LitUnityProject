@@ -26,6 +26,7 @@ public class EnemyHpController : MonoBehaviour
 
         if(enemyHp == 0)
         {
+            ScoreCounter.destroyedEnemyCount++;
             Destroy(this.gameObject);
         }
     }
@@ -38,4 +39,6 @@ public class EnemyHpController : MonoBehaviour
 
         }
     }
+
+    
 }
