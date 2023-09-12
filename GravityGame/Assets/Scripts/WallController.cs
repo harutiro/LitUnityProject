@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,11 @@ public class WallController : MonoBehaviour
     /// 壁のスピードを指定する
     /// </summary>
     public float speed = 1.0f;
+
+    /// <summary>
+    /// ゲームオブジェクトを消滅させる位置を指定する
+    /// </summary>
+    public float deadLine = 10.0f;
     
     // Start is called before the first frame update
     void Start()
@@ -19,5 +25,15 @@ public class WallController : MonoBehaviour
     void Update()
     {
         transform.position += transform.forward * (speed * Time.deltaTime);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        // プレイヤーと衝突したら
+        if (other.gameObject.CompareTag("deleteWall"))
+        {
+            // プレイヤーを消滅させる
+            Destroy(gameObject);
+        }
     }
 }
