@@ -1508,6 +1508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 2086059186091746901, guid: 36d1e231c5d9341a5afcd9bb32aa9b44, type: 3}
+  itemPrefab: {fileID: 6617576829034577881, guid: 058063ce216894d13a6ab513da68cb48, type: 3}
   interval: 0.15
   probability: 20
 --- !u!4 &1533617790

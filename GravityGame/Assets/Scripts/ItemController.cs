@@ -20,6 +20,4 @@ public class ItemController : MonoBehaviour
             transform.position += transform.forward * (GameManager.speed * Time.deltaTime);
         }
     }
-    
-    
 }

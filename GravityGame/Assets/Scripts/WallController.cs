@@ -24,14 +24,4 @@ public class WallController : MonoBehaviour
             transform.position += transform.forward * (GameManager.speed * Time.deltaTime);
         }
     }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        // プレイヤーと衝突したら
-        if (other.gameObject.CompareTag("deleteWall"))
-        {
-            // プレイヤーを消滅させる
-            Destroy(gameObject);
-        }
-    }
 }
