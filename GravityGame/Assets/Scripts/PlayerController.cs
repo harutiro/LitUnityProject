@@ -18,12 +18,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // スペースキーが押されたら
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (GameManager.isPlaying)
         {
-            // 重力を反転する
-            isNormalGravity = !isNormalGravity;
-            ChangeGravity();
+            // スペースキーが押されたら
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                // 重力を反転する
+                isNormalGravity = !isNormalGravity;
+                ChangeGravity();
+            }
         }
     }
     

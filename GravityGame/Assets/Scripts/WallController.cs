@@ -24,7 +24,10 @@ public class WallController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.forward * (speed * Time.deltaTime);
+        if (GameManager.isPlaying)
+        {
+            transform.position += transform.forward * (speed * Time.deltaTime);
+        }
     }
 
     private void OnCollisionEnter(Collision other)
