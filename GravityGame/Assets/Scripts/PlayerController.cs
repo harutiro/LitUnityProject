@@ -56,6 +56,13 @@ public class PlayerController : MonoBehaviour
             // ゲームオーバーにする
             GameManager.isPlaying = false;
         }
+        
+        // プレイヤーと衝突したら
+        if (other.gameObject.CompareTag("Item"))
+        {
+            Debug.Log("Item");
+            Destroy(other.gameObject);
+        }
 
     }
 }
