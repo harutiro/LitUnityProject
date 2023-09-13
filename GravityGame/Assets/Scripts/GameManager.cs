@@ -12,6 +12,11 @@ public class GameManager : MonoBehaviour
     
     public static bool isPlaying = true;
     
+    /// <summary>
+    /// スコアの保存
+    /// </summary>
+    public static int score = 0;
+    
     // Start is called before the first frame update
     void Start()
     {

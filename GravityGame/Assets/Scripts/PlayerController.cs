@@ -62,6 +62,10 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Item");
             Destroy(other.gameObject);
+            
+            // スコアを加算する
+            GameManager.score += 1;
+            UIController.ScoreUpdate(GameManager.score);
         }
 
     }

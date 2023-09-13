@@ -28,7 +28,7 @@ public class WallCreator : MonoBehaviour
     /// <summary>
     /// アイテムの生成確率
     /// </summary>
-    public int probability = 20;
+    public int probability = 10;
     
     private Vector3 oldPosition = new Vector3(0,0,-10);
     
@@ -55,7 +55,10 @@ public class WallCreator : MonoBehaviour
                 Instantiate(wallPrefab, oldPosition, transform.rotation);
                 
                 // アイテムを生成する
-                Instantiate(itemPrefab, oldPosition + new Vector3(0, Random.Range(-1.0f,1.0f),0) ,transform.rotation); 
+                if (Random.Range(0, probability - 1) == 0)
+                {
+                    Instantiate(itemPrefab, oldPosition + new Vector3(0, Random.Range(-1.0f,4.0f),0) ,transform.rotation); 
+                }
                 timer = 0.0f; // 経過時間をリセットする
             }
         }
