@@ -18,11 +18,6 @@ public class PlayerController : MonoBehaviour
     public Text scoreText;
     
     /// <summary>
-    /// スコアの保存
-    /// </summary>
-    public static int score = 0;
-    
-    /// <summary>
     /// MessageUI
     /// </summary>
     public Text messageUI;
@@ -37,10 +32,21 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public Button retryButtonUI;
     
+    /// <summary>
+    /// HighScoreTextを指定する
+    /// </summary>
+    public Text highScoreText;
+    
+    /// <summary>
+    /// HighScreenの保存用
+    /// </summary>
+    int highScore = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        highScore = PlayerPrefs.GetInt ("HIGH_SCORE", 0);
+        highScoreText.text = "HighScore : " + highScore.ToString();
     }
 
     // Update is called once per frame
@@ -99,6 +105,17 @@ public class PlayerController : MonoBehaviour
         messageUI.text = "GameOver";
         retryButtonUI.gameObject.SetActive(true);
         startButtonUI.gameObject.SetActive(false);
+        
+        // スコアを保存
+        Debug.Log(highScore + " : " + GameManager.score);
+        if(highScore < GameManager.score)
+        {
+            PlayerPrefs.SetInt ("HIGH_SCORE", GameManager.score);
+            PlayerPrefs.Save();
+            highScore = GameManager.score;
+            
+            highScoreText.text = "HighScore : " + highScore.ToString();
+        }
         
         GameManager.isPlaying = false;
     }
