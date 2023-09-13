@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,8 +12,30 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public bool isNormalGravity = true;
     
-    // private int forwardCollisionCount = 0; // 衝突した向きがforwardの回数をカウント
-    // private int maxForwardCollisions = 3; // ゲームオーバーになるカウントの閾値
+    /// <summary>
+    /// ScoreTextを指定する
+    /// </summary>
+    public Text scoreText;
+    
+    /// <summary>
+    /// スコアの保存
+    /// </summary>
+    public static int score = 0;
+    
+    /// <summary>
+    /// MessageUI
+    /// </summary>
+    public Text messageUI;
+    
+    /// <summary>
+    /// StartButtonのUI
+    /// </summary>
+    public Button startButtonUI;
+    
+    /// <summary>
+    /// RetryButtonのUI
+    /// </summary>
+    public Button retryButtonUI;
     
     // Start is called before the first frame update
     void Start()
@@ -54,7 +77,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("WallCollider"))
         {
             // ゲームオーバーにする
-            GameManager.isPlaying = false;
+            GameOver();
         }
         
         // プレイヤーと衝突したら
@@ -65,8 +88,18 @@ public class PlayerController : MonoBehaviour
             
             // スコアを加算する
             GameManager.score += 1;
-            UIController.ScoreUpdate(GameManager.score);
+            scoreText.text = GameManager.score.ToString();
         }
 
+    }
+    
+    public void GameOver()
+    {
+        messageUI.gameObject.SetActive(true);
+        messageUI.text = "GameOver";
+        retryButtonUI.gameObject.SetActive(true);
+        startButtonUI.gameObject.SetActive(false);
+        
+        GameManager.isPlaying = false;
     }
 }
