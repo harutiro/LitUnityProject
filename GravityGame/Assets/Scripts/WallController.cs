@@ -6,11 +6,6 @@ using UnityEngine;
 public class WallController : MonoBehaviour
 {
     /// <summary>
-    /// 壁のスピードを指定する
-    /// </summary>
-    public float speed = 1.0f;
-
-    /// <summary>
     /// ゲームオブジェクトを消滅させる位置を指定する
     /// </summary>
     public float deadLine = 10.0f;
@@ -26,7 +21,7 @@ public class WallController : MonoBehaviour
     {
         if (GameManager.isPlaying)
         {
-            transform.position += transform.forward * (speed * Time.deltaTime);
+            transform.position += transform.forward * (GameManager.speed * Time.deltaTime);
         }
     }
 

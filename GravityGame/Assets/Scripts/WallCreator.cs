@@ -11,6 +11,11 @@ public class WallCreator : MonoBehaviour
     public GameObject wallPrefab;
     
     /// <summary>
+    /// アイテムのプレハブを指定する
+    /// </summary>
+    public GameObject itemPrefab;
+    
+    /// <summary>
     /// 壁の生成時間を保存する
     /// </summary>
     float timer = 0.0f;
@@ -19,6 +24,11 @@ public class WallCreator : MonoBehaviour
     /// 生存間隔を指定する
     /// </summary>
     public float interval = 5.0f;
+    
+    /// <summary>
+    /// アイテムの生成確率
+    /// </summary>
+    public int probability = 20;
     
     private Vector3 oldPosition = new Vector3(0,0,-10);
     
@@ -34,17 +44,18 @@ public class WallCreator : MonoBehaviour
         if (GameManager.isPlaying)
         {
             timer += Time.deltaTime; // 経過時間を加算する
-            Debug.Log(timer.ToString());
             if (timer > interval) // 経過時間が生存間隔を超えたら
             {
                 Vector3 randamPosition = new Vector3(0, Random.Range(-1, 2), 0);
                 oldPosition += randamPosition;
-                // Debug.Log(randamPosition.ToString());
-                // Debug.Log(oldPosition.ToString());
                 if(oldPosition.y > 2.0f) oldPosition = new Vector3(0, 2.0f, -10);
                 if(oldPosition.y < -2.0f) oldPosition = new Vector3(0, -2.0f, -10);
 
-                Instantiate(wallPrefab, oldPosition, transform.rotation); // 壁を生成する
+                // 壁を生成する
+                Instantiate(wallPrefab, oldPosition, transform.rotation);
+                
+                // アイテムを生成する
+                Instantiate(itemPrefab, oldPosition + new Vector3(0, Random.Range(-1.0f,1.0f),0) ,transform.rotation); 
                 timer = 0.0f; // 経過時間をリセットする
             }
         }

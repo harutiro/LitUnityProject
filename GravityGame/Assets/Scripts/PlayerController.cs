@@ -1,3 +1,5 @@
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +10,9 @@ public class PlayerController : MonoBehaviour
     /// 重力がかかる向きを指定する
     /// </summary>
     public bool isNormalGravity = true;
+    
+    // private int forwardCollisionCount = 0; // 衝突した向きがforwardの回数をカウント
+    // private int maxForwardCollisions = 3; // ゲームオーバーになるカウントの閾値
     
     // Start is called before the first frame update
     void Start()
@@ -40,5 +45,17 @@ public class PlayerController : MonoBehaviour
         
         // プレイヤーの向きを反転する
         transform.Rotate(new Vector3(0, 0, 180));
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.tag);
+        
+        if (other.gameObject.CompareTag("WallCollider"))
+        {
+            // ゲームオーバーにする
+            GameManager.isPlaying = false;
+        }
+
     }
 }
