@@ -12,10 +12,18 @@ public class GameManager : MonoBehaviour
     public GameObject defaultWalls;
     
     /// <summary>
+    /// Player
+    /// </summary>
+    public GameObject player;
+    
+    /// <summary>
     /// 壁のスピードを指定する
     /// </summary>
     public static float speed = 6.0f;
     
+    /// <summary>
+    /// Play中かどうかを保存する
+    /// </summary>
     public static bool isPlaying = true;
     
     /// <summary>
@@ -83,6 +91,9 @@ public class GameManager : MonoBehaviour
         
         // defaultWallsを複製する
         Instantiate(defaultWalls);
+        
+        // Playerを0,0,0に移動する
+        player.transform.position = new Vector3(0,0,0);
         
         scoreUI.gameObject.SetActive(true);
         messageUI.gameObject.SetActive(false);

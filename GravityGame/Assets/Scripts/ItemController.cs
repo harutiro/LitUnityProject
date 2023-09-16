@@ -17,7 +17,7 @@ public class ItemController : MonoBehaviour
     {
         if (GameManager.isPlaying)
         {
-            transform.position += transform.forward * (GameManager.speed * Time.deltaTime);
+            transform.position += new Vector3(0,0,1) * (GameManager.speed * Time.deltaTime);
         }
     }
 }
